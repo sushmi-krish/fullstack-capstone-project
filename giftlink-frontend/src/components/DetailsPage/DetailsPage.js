@@ -13,16 +13,20 @@ function DetailsPage() {
         const authenticationToken = sessionStorage.getItem('auth-token');
         if (!authenticationToken) {
 			// Task 1: Check for authentication and redirect
-            {{insert code here}}
+            navigate('/');
+            return;
+
         }
 
         // get the gift to be rendered on the details page
-        const fetchGift = async () => {
+       /* const fetchGift = async () => {
             try {
 				// Task 2: Fetch gift details
-                const response ={{insert code here}}
+                const response =await fetch(`http://localhost:3001/gifts/${productId}`);
+
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
+                    
                 }
                 const data = await response.json();
                 setGift(data);
@@ -33,17 +37,36 @@ function DetailsPage() {
             }
         };
 
-        fetchGift();
+        fetchGift();*/
+        // Simulando gift se o backend ainda não está pronto
+    const fakeGift = {
+        id: productId,
+        name: "Teste Gift",
+        image: "https://via.placeholder.com/300x200?text=Gift+Image",
+        category: "Books",
+        condition: "Used",
+        dateAdded: new Date().toISOString(),
+        age: 2,
+        description: "Este é um presente de exemplo usado para testes.",
+    };
+
+    // Simula o carregamento e define o gift
+    const timer = setTimeout(() => {
+        setGift(fakeGift);
+        setLoading(false);
+    }, 500);
 
 		// Task 3: Scroll to top on component mount
-		{{ insert code here }}
+		window.scrollTo(0, 0);
+
 
     }, [productId]);
 
 
     const handleBackClick = () => {
 		// Task 4: Handle back click
-		{{ insert code here }}
+		navigate(-1);
+
 	};
 
 	//The comments have been hardcoded for this project.
@@ -84,35 +107,36 @@ return (
                 </div>
                 <div className="card-body">
                     <div className="image-placeholder-large">
+                        {/* Task 5: Display gift image*/}
                         {gift.image ? (
-			// Task 5: Display gift image
-			/*insert code here*/
+			
+			 <img src={gift.image} alt={gift.name} className="img-fluid  product-image-large" />
                         ) : (
                             <div className="no-image-available-large">No Image Available</div>
                         )}
                     </div>
-                    // Task 6: Display gift details
+                    { /*Task 6: Display gift details*/}
                     	<p><strong>Category:</strong> 
-				{/* insert code here  */}
+				{ gift.category ? gift.category : 'N/A' }
 			</p>
                     	<p><strong>Condition:</strong> 
-				{/* insert code here  */}
+				{ gift.condition ? gift.condition : 'N/A' }
                     	</p>
                     	<p><strong>Date Added:</strong> 
-				{/* insert code here  */}
+				{ gift.dateAdded ? new Date(gift.dateAdded).toLocaleDateString() : 'N/A' }
                         </p>
                     	<p><strong>Age (Years):</strong> 
-				{/* insert code here  */}
+				{ gift.age ? gift.age : 'N/A' }
                     	</p>
                     	<p><strong>Description:</strong> 
-				{/* insert code here  */}
+				{ gift.description ? gift.description : 'No description available.' }
                     	</p>
                 </div>
             </div>
             <div className="comments-section mt-4">
                 <h3 className="mb-3">Comments</h3>
-				// Task 7: Render comments section by using the map function to go through all the comments
-				{{ insert code here }} => (
+				Task 7: Render comments section by using the map function to go through all the comments
+				{ comments.map((comment, index) => (
                     <div key={index} className="card mb-3">
                         <div className="card-body">
                             <p className="comment-author"><strong>{comment.author}:</strong></p>
