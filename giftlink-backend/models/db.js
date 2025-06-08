@@ -28,6 +28,6 @@ try{
     console.Error("Fail to connect the server",err)
 }
 }
-
-
+//call the function for testing 
+//connectToDatabase()
 module.exports = connectToDatabase;
