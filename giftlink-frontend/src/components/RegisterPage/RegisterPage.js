@@ -40,23 +40,23 @@ function RegisterPage() {
             })
         });
 
-        //Step 2 - Task 1
+        //Access data in JSON format as a response from the back end
         const json = await response.json();
         console.log('json data', json);
         console.log('er', json.error);
 
-        //Step 2 - Task 2
+        //: Set user details
         if (json.authtoken) {
             sessionStorage.setItem('auth-token', json.authtoken);
             sessionStorage.setItem('name', firstName);
             sessionStorage.setItem('email', json.email);
-        //Step 2 - Task 3
+        //Set the state of user to logged in using the useAppContext.
             setIsLoggedIn(true);
-        //Step 2 - Task 4
+        //Navigate to the MainPage after logging in.
             navigate('/app');
         }
         if (json.error) {
-        //Step 2 - Task 5
+        //Set an error message if the registration fails.
             setShowerr(json.error);
         }
     }
@@ -104,7 +104,7 @@ function RegisterPage() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
-                        {/* Step 2 - Task 6*/}
+                        {/*Display error message to end user. */}
 
                                 <div className="text-danger">{showerr}</div>
                         </div>
