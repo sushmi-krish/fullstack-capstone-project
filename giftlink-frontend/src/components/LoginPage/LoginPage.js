@@ -1,13 +1,47 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import './LoginPage.css';
-
+import {urlConfig} from '../../config';
+import {useAppContext} from '../../context/AuthContext';
+import {useNavigate} from 'react-router-dom';
 function LoginPage(){
 //create useState hook for the variables 
 const [Email, setEmail] = useState('');
 const [password , setPassword] = useState('');
+//Included a state for incorrect password.
+const [incorrect, setInCorrect] = useState('');
+// Create a local variable for `navigate`,`bearerToken`   and `setIsLoggedIn`.
+const navigate = useNavigate();
+const bearerToken = sessionStorage.getItem('bearer-token')
+const { setISLoggedIn} = useAppContext();
+//If the bearerToken has a value (user already logged in), navigate to MainPage.
+useEffect(()=>{
+    if(sessionStorage.getItem('auth-token')){
+        navigate('/app')
+    }
+},[navigate])
+
+
 //create handle function and includes console.log
 const handleLogin= async (e)=>{
     e.preventDefault();
+    try{
+        //first task
+      const response = await fetch(`/api/auth/login`, {
+             method:'POST',
+             header:{
+                'content-type':'application/json',
+                'Authorization': bearerToken ? `Bearer ${bearerToken}`: '',
+
+             },
+          // Set body to send user details
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          })
+     })
+      }catch (e) {
+        console.log("Error fetching details: " + e.message);
+    }
 }
   
 
