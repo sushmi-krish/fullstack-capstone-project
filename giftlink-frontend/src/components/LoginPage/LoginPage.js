@@ -24,27 +24,44 @@ useEffect(()=>{
 //create handle function and includes console.log
 const handleLogin= async (e)=>{
     e.preventDefault();
-    try{
-        //first task
-      const response = await fetch(`/api/auth/login`, {
+
+    //first task
+      const response = await fetch(`${urlConfig.backendUrl}/api/auth/login`, {
              method:'POST',
-             header:{
-                'content-type':'application/json',
+             headers:{
+                'Content-Type':'application/json',
                 'Authorization': bearerToken ? `Bearer ${bearerToken}`: '',
 
              },
           // Set body to send user details
           body: JSON.stringify({
-            email: email,
+            email: Email,
             password: password,
           })
-     })
-      }catch (e) {
-        console.log("Error fetching details: " + e.message);
-    }
-}
-  
-
+        });
+          //{code from Step 1}
+        // Task 1: Access data coming from fetch API
+            const json = await response.json();
+        //  Set user details
+          if(json.authtoken){
+            sessionStorage.setItem('auth-token',json.authtoken)
+             sessionStorage.setItem('name',json.userName);
+             sessionStorage.setItem('email',json.email)
+        // Task 3: Set the user's state to log in using the `useAppContext`.
+            setISLoggedIn(true)
+        // Task 4: Navigate to the MainPage after logging in.
+           navigate('/app')
+          }else{
+        // Task 5: Clear input and set an error message if the password is incorrect
+            document.getElementById('email').value ='';
+            document.getElementById('password').value='';
+            setInCorrect("Wrong password Try again")
+            setTimeout(()=>{
+                setInCorrect('')
+            },2000);
+          
+        } 
+ }
 
 return(
     <div className='container mt-5'>
@@ -73,6 +90,7 @@ return(
                         placeholder='Enter Your Password'
                         value ={password}
                         onChange={(e)=>setPassword(e.target.value)}/>
+                        <span style = {{color:'red',height:'.5cm', display: 'block',fontStyle:'italic',fontSize:'12px'}}>{incorrect}</span>
                     </div>
                     {/*button*/}
                     <button className='btn btn-primary w-100 mb-3'onClick={handleLogin}>Login</button>
