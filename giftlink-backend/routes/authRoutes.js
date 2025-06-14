@@ -78,7 +78,7 @@ router.post('/login', async (req, res) => {
             },
         };
         //  Fetch user details from database
-        const userName = theUser.userName;
+        const userName = `${theUser. firstName} ${theUser. lastName}`;
         const userEmail = theUser.email;
          // Create JWT authentication if passwords match with user._id as payload
         const authtoken = jwt.sign(payload, JWT_SECRET);

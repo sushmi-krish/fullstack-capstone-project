@@ -42,9 +42,11 @@ const handleLogin= async (e)=>{
           //{code from Step 1}
         // Task 1: Access data coming from fetch API
             const json = await response.json();
+            console.log("Full response from backend ",json)
         //  Set user details
           if(json.authtoken){
             sessionStorage.setItem('auth-token',json.authtoken)
+            console.log(`Username: ${JSON.stringify(json.userName)}`);
              sessionStorage.setItem('name',json.userName);
              sessionStorage.setItem('email',json.email)
         // Task 3: Set the user's state to log in using the `useAppContext`.
