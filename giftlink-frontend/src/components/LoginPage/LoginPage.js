@@ -12,7 +12,7 @@ const [incorrect, setInCorrect] = useState('');
 // Create a local variable for `navigate`,`bearerToken`   and `setIsLoggedIn`.
 const navigate = useNavigate();
 const bearerToken = sessionStorage.getItem('bearer-token')
-const { setISLoggedIn} = useAppContext();
+const { setIsLoggedIn} = useAppContext();
 //If the bearerToken has a value (user already logged in), navigate to MainPage.
 useEffect(()=>{
     if(sessionStorage.getItem('auth-token')){
@@ -48,7 +48,7 @@ const handleLogin= async (e)=>{
              sessionStorage.setItem('name',json.userName);
              sessionStorage.setItem('email',json.email)
         // Task 3: Set the user's state to log in using the `useAppContext`.
-            setISLoggedIn(true)
+            setIsLoggedIn(true)
         // Task 4: Navigate to the MainPage after logging in.
            navigate('/app')
           }else{
