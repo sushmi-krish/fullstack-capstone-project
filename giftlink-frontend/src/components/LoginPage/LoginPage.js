@@ -46,9 +46,10 @@ const handleLogin= async (e)=>{
         //  Set user details
           if(json.authtoken){
             sessionStorage.setItem('auth-token',json.authtoken)
-            console.log(`Username: ${JSON.stringify(json.userName)}`);
+           //Handle the Error console.log(`Username:${json.userName}`);
              sessionStorage.setItem('name',json.userName);
-             sessionStorage.setItem('email',json.email)
+             sessionStorage.setItem('email',json.userEmail)
+             console.log("sessionStorage -->email:",sessionStorage.getItem('email'))
         // Task 3: Set the user's state to log in using the `useAppContext`.
             setIsLoggedIn(true)
         // Task 4: Navigate to the MainPage after logging in.

@@ -78,7 +78,7 @@ router.post('/login', async (req, res) => {
             },
         };
         //  Fetch user details from database
-        const userName = `${theUser. firstName} ${theUser. lastName}`;
+        const userName = `${theUser. firstName} ${theUser. lastName}`
         const userEmail = theUser.email;
          // Create JWT authentication if passwords match with user._id as payload
         const authtoken = jwt.sign(payload, JWT_SECRET);
@@ -121,13 +121,20 @@ try {
         logger.error('User not founc')
         return res.status(404).json({error:'User not found' })
      }
-    existingUser.firstName = req.body.name;
-    existingUser.updatedAt = new Date();
+     const fullName = req.body.name || '';
+     const divideName = fullName.trim().split(' ');
+     const firstName = divideName[0] || '';
+     const lastName = divideName.slice(1).join(' ');
+     const updateField = {
+        firstName,
+        lastName,
+        updatedAt :new Date(),
+     }
 
-    // Task 6: update user credentials in database
+ // Task 6: update user credentials in database
     const updatedUser = await collection.findOneAndUpdate(
         {email},
-        {$set: existingUser},
+        {$set: updateField},
         {returnDocument:'after'},
 
     );
@@ -135,7 +142,7 @@ try {
     // Task 7: create JWT authentication using secret key from .env file
     const payload ={
         user:{
-            id: updatedUser._id.toString(),
+            id: updatedUser.value._id.toString(),
         },
     };
     const authtoken = jwt.sign(payload, JWT_SECRET);

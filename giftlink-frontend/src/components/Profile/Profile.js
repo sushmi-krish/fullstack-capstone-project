@@ -5,14 +5,16 @@ import {urlConfig} from '../../config';
 import { useAppContext } from '../../context/AuthContext';
 
 const Profile = () => {
-  const [userDetails, setUserDetails] = useState({});
- const [updatedDetails, setUpdatedDetails] = useState({});
- const {setUserName} = useAppContext();
- const [changed, setChanged] = useState("");
 
- const [editMode, setEditMode] = useState(false);
-  const navigate = useNavigate();
-  useEffect(() => {
+const [userDetails, setUserDetails] = useState({});
+const [updatedDetails, setUpdatedDetails] = useState({});
+const {setUserName} = useAppContext();
+const [changed, setChanged] = useState("");
+const [editMode, setEditMode] = useState(false);
+const navigate = useNavigate();
+
+useEffect(() => {
+
     const authtoken = sessionStorage.getItem("auth-token");
     if (!authtoken) {
       navigate("/app/login");
@@ -26,18 +28,20 @@ const Profile = () => {
       const authtoken = sessionStorage.getItem("auth-token");
       const email = sessionStorage.getItem("email");
       const name=sessionStorage.getItem('name');
+      console.log("From sessionStorage---> name:",name,"email:",email)
       if (name || authtoken) {
                 const storedUserDetails = {
                   name: name,
-                  email:email
+                  email:email,
                 };
 
                 setUserDetails(storedUserDetails);
                 setUpdatedDetails(storedUserDetails);
               }
 } catch (error) {
+    //Handle the error 
   console.error(error);
-  // Handle error case
+  
 }
 };
 
@@ -64,6 +68,7 @@ const handleSubmit = async (e) => {
     }
 
     const payload = { ...updatedDetails };
+    console.log("payload details",payload)
     const response = await fetch(`${urlConfig.backendUrl}/api/auth/update`, {
       //Step 1: Task 1 set method
       method: 'PUT',
@@ -98,10 +103,12 @@ const handleSubmit = async (e) => {
       throw new Error("Failed to update profile");
     }
   } catch (error) {
+     // Handle error case
     console.error(error);
-    // Handle error case
+   
   }
 };
+console.log(`updatename ${userDetails.email}`)
 
 return (
 <div className="profile-container">
@@ -112,7 +119,7 @@ return (
   <input
     type="email"
     name="email"
-    value={userDetails.email}
+    value={userDetails.Email}
     disabled // Disable the email field
   />
 </label>
