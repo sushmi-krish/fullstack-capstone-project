@@ -20,7 +20,7 @@ router.get('/', async (req, res,next) => {
         // return the gifts using the res.json method
         res.json(gifts);
     } catch (e) {
-        logger.console.error('oops something went wrong')
+        logger.error('oops something went wrong');
        // console.error('Error fetching gifts:', e);
         //res.status(500).send('Error fetching gifts');
         next(e);
@@ -30,7 +30,7 @@ router.get('/', async (req, res,next) => {
 router.get('/:id', async (req, res) => {
     try {
         // Task 1: Connect to MongoDB and store connection to db constant
-         const db =await connectToDatabase()
+         const db =await connectToDatabase();
 
         // Task 2: use the collection() method to retrieve the gift collection
          const collection = db.collection("gifts");
@@ -38,7 +38,7 @@ router.get('/:id', async (req, res) => {
         const id = req.params.id;
 
         // Task 3: Find a specific gift by ID using the collection.fineOne method and store in constant called gift
-        const gift = await collection.findOne({id: id})
+        const gift = await collection.findOne({id: id});
 
         if (!gift) {
             return res.status(404).send('Gift not found');
