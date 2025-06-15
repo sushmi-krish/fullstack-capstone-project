@@ -22,7 +22,7 @@ export default function Navbar() {
               setIsLoggedIn(false);
             }
         }
-    },[isLoggedIn, setIsLoggedIn, setUserName, navigate])
+    },[setIsLoggedIn, setUserName, navigate])
     const handleLogout=()=>{
         sessionStorage.removeItem('auth-token');
         sessionStorage.removeItem('name');
