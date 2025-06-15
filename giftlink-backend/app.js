@@ -24,13 +24,13 @@ app.use(express.json());
 
 // Route files
 // Gift API : import the giftRoutes and store in a constant called giftroutes
-const giftRoutes = require('./routes/giftRoutes')
+const giftRoutes = require('./routes/giftRoutes');
 
 // Search API : import the searchRoutes and store in a constant called searchRoutes
-const searchRoutes = require('./routes/searchRoutes')
+const searchRoutes = require('./routes/searchRoutes');
 
 //authRoutes:import the authRoutes for register
-const  authRoutes = require('./routes/authRoutes')
+const  authRoutes = require('./routes/authRoutes');
 
 const pinoHttp = require('pino-http');
 const logger = require('./logger');
@@ -53,7 +53,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get("/",(req,res)=>{
-    res.send("Inside the server")
+    res.send("Inside the server");
 })
 
 app.listen(port, () => {
