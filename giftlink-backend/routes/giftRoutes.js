@@ -1,10 +1,11 @@
+/* jshint esversion: 8 */
 //const { Collection } = require("mongodb");
 const express = require('express');
 const router = express.Router();
 const connectToDatabase = require("../models/db");
 const logger = require('../logger');
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res,next) => {
     logger.info('/called');
     try {
         // Task 1: Connect to MongoDB and store connection to db constant
