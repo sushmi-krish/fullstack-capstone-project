@@ -22,6 +22,7 @@ export default function Navbar() {
               setIsLoggedIn(false);
             }
         }
+        navigate()
     },[isLoggedIn, setIsLoggedIn, setUserName, navigate])
     const handleLogout=()=>{
         sessionStorage.removeItem('auth-token');
