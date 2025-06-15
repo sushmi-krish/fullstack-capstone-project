@@ -41,7 +41,7 @@ function DetailsPage() {
 		//  Scroll to top on component mount
 		window.scrollTo(0,0)
 
-    }, [productId]);
+    }, [productId, navigate]);
 
 
     const handleBackClick = () => {
