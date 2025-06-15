@@ -8,6 +8,7 @@ export default function Navbar() {
     const { isLoggedIn, setIsLoggedIn, userName, setUserName } = useAppContext();
 
   const navigate=useNavigate();
+    
     useEffect(() => {
         const authTokenFromSession = sessionStorage.getItem('auth-token');
         const nameFromSession = sessionStorage.getItem('name');
@@ -22,7 +23,8 @@ export default function Navbar() {
               setIsLoggedIn(false);
             }
         }
-    },[isLoggedIn, setIsLoggedIn, setUserName, navigate])
+    },[isLoggedIn, setIsLoggedIn, setUserName])
+    
     const handleLogout=()=>{
         sessionStorage.removeItem('auth-token');
         sessionStorage.removeItem('name');
@@ -30,10 +32,12 @@ export default function Navbar() {
         setIsLoggedIn(false);
         navigate(`/app`);
 
-    }
+    };
+    
     const profileSecton=()=>{
       navigate(`/app/profile`);
-    }
+    };
+    
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light" id='navbar_container'>
