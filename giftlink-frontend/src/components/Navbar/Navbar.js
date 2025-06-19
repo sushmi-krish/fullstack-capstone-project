@@ -4,14 +4,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAppContext } from '../../context/AuthContext';
 
 export default function Navbar() {
-
     const { isLoggedIn, setIsLoggedIn, userName, setUserName } = useAppContext();
 
   const navigate=useNavigate();
     useEffect(() => {
         const authTokenFromSession = sessionStorage.getItem('auth-token');
         const nameFromSession = sessionStorage.getItem('name');
-       // const emailFromSession = sessionStorage.getItem('email')
         if (authTokenFromSession) {
             if(isLoggedIn && nameFromSession) {
               setUserName(nameFromSession);
@@ -22,7 +20,7 @@ export default function Navbar() {
               setIsLoggedIn(false);
             }
         }
-    },[isLoggedIn, setIsLoggedIn, setUserName, navigate])
+    },[isLoggedIn, setIsLoggedIn, setUserName])
     const handleLogout=()=>{
         sessionStorage.removeItem('auth-token');
         sessionStorage.removeItem('name');
@@ -37,7 +35,7 @@ export default function Navbar() {
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light" id='navbar_container'>
-        <Link className="navbar-brand"  to="/app">GiftLink</Link>
+              <Link className="navbar-brand" to="/app">GiftLink</Link>
 
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
@@ -57,7 +55,7 @@ export default function Navbar() {
             <ul className="navbar-nav ml-auto">
             {isLoggedIn ? (
                                     <>
-                                    <li className="nav-item"> <span className="nav-link" style={{color: "black", cursor:"pointer"}} onClick={profileSecton}>Welcome,{userName}</span> </li>
+                                    <li className="nav-item"> <span className="nav-link" style={{color: "black", cursor:"pointer"}} onClick={profileSecton}>Welcome, {userName}</span> </li>
                                     <li className="nav-item"><button className="nav-link login-btn" onClick={handleLogout}>Logout</button></li>
                                     </>
                                     )  : (
