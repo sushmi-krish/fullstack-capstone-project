@@ -5,7 +5,8 @@ GiftLink is a full-stack web application designed to connect users who want to g
 The application provides a seamless user experience through a rich front-end interface built with React, supported by a robust backend API with Node.js, Express, and MongoDB. It also features secure authentication, item listings, search, and profile management.
 ----
 # Features
-* User Interface:
+1. User Interface:
+  
  - Home page showcasing available gifts.
  - Listings page with detailed information on items.
  - Navigation bar with links to all key sections.
@@ -14,13 +15,13 @@ The application provides a seamless user experience through a rich front-end int
  - User registration and login pages.
  - Editable user profile page.
    
- * Backend:
+ 2. Backend:
 - RESTful API endpoints for managing gifts, users, authentication, and search.
 - MongoDB as a NoSQL database for storing users and gifts data.
 - Secure authentication with JSON Web Tokens (JWT).
 - Sentiment analysis service to analyze user comments (optional module).
 
-* Deployment:
+3. Deployment:
   - Containerized with Docker.
   - Deployed to cloud platforms including Kubernetes clusters and IBM Code Engine.
   - Continuous Integration/Continuous Deployment (CI/CD) pipelines using GitHub Actions.
